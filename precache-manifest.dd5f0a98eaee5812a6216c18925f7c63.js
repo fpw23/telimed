@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a7f4f64302ed1ebd858882dcfb96c7da",
+    "revision": "080d866a3d92beb3009caac1cd1adc97",
     "url": "/telimed/index.html"
   },
   {
-    "revision": "acd8fd4ce88a04867097",
+    "revision": "31e2f42cba0d92b3afdb",
     "url": "/telimed/static/css/main.c7b63297.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/telimed/static/js/2.42b7c940.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "acd8fd4ce88a04867097",
-    "url": "/telimed/static/js/main.a8548e53.chunk.js"
+    "revision": "31e2f42cba0d92b3afdb",
+    "url": "/telimed/static/js/main.ef7901ea.chunk.js"
   },
   {
     "revision": "785c79a9f30cf96abfd2",

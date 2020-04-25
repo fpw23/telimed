@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/telimed/static/css/main.c7b63297.chunk.css",
-    "main.js": "/telimed/static/js/main.a8548e53.chunk.js",
-    "main.js.map": "/telimed/static/js/main.a8548e53.chunk.js.map",
+    "main.js": "/telimed/static/js/main.ef7901ea.chunk.js",
+    "main.js.map": "/telimed/static/js/main.ef7901ea.chunk.js.map",
     "runtime-main.js": "/telimed/static/js/runtime-main.ab74ab6f.js",
     "runtime-main.js.map": "/telimed/static/js/runtime-main.ab74ab6f.js.map",
     "static/js/2.42b7c940.chunk.js": "/telimed/static/js/2.42b7c940.chunk.js",
     "static/js/2.42b7c940.chunk.js.map": "/telimed/static/js/2.42b7c940.chunk.js.map",
     "index.html": "/telimed/index.html",
-    "precache-manifest.0c2671226abc99543961e2067342543d.js": "/telimed/precache-manifest.0c2671226abc99543961e2067342543d.js",
+    "precache-manifest.dd5f0a98eaee5812a6216c18925f7c63.js": "/telimed/precache-manifest.dd5f0a98eaee5812a6216c18925f7c63.js",
     "service-worker.js": "/telimed/service-worker.js",
     "static/css/main.c7b63297.chunk.css.map": "/telimed/static/css/main.c7b63297.chunk.css.map",
     "static/js/2.42b7c940.chunk.js.LICENSE.txt": "/telimed/static/js/2.42b7c940.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.ab74ab6f.js",
     "static/js/2.42b7c940.chunk.js",
     "static/css/main.c7b63297.chunk.css",
-    "static/js/main.a8548e53.chunk.js"
+    "static/js/main.ef7901ea.chunk.js"
   ]
 }

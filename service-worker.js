@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/telimed/precache-manifest.0c2671226abc99543961e2067342543d.js"
+  "/telimed/precache-manifest.dd5f0a98eaee5812a6216c18925f7c63.js"
 );
 
 self.addEventListener('message', (event) => {
