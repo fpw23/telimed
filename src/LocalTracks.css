@@ -1,0 +1,29 @@
+.local_track {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 20px 1fr;
+    grid-template-areas: "local_controls" "local_body";
+    height: 100%;
+}
+
+.local_track_controls {
+    grid-area: local_controls;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.local_track_controls span {
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+.local_track_body {
+    grid-area: local_body;
+}
+
+.local_track_body video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}

@@ -1,38 +1,95 @@
 .App {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "TL TR" "B B";
   text-align: center;
+  column-gap: 5px;
+  row-gap: 5px;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.AppLoading {
+  grid-row: 1/-1;
+  grid-column: 1/-1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.TL {
+  border: solid 1px purple;
+  grid-area: TL;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.TL div {
+  margin: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.TR {
+  border: solid 1px purple;
+  grid-area: TR;
+  display: grid;
+  grid-template-rows: 100px 1fr;
+  grid-template-columns: 1fr;
+  grid-template-areas: "tr_header" "tr_body";
 }
+
+.TR_Header {
+  text-align: center;
+  grid-area: tr_header;
+}
+
+.TR_Body {
+  display: grid;
+  grid-area: tr_body;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  grid-auto-rows: minmax(50px, auto);
+  grid-gap: 12.5px;
+  padding: 12.5px;
+}
+
+.TR_Body_Block {
+  grid-column-end: span 4;
+  border: dashed 1px red;
+  height: fit-content;
+}
+
+.B {
+  border: solid 1px purple;
+  grid-area: B;
+  display: grid;
+  grid-template-rows: 100px 1fr;
+  grid-template-columns: 1fr;
+  grid-template-areas: "b_header" "b_body";
+}
+
+.B_Header {
+  text-align: center;
+  grid-area: b_header;
+}
+
+.B_Body {
+  display: grid;
+  grid-area: b_body;
+  grid-template-columns: repeat(auto-fit, 50px);
+  grid-auto-rows: minmax(50px, auto);
+  grid-gap: 12.5px;
+  padding: 12.5px;
+}
+
+.B_Body_Block {
+  grid-column-end: span 3;
+  border: dashed 1px green;
+  height: fit-content;
+}
+
