@@ -1,7 +1,7 @@
 {
   "name": "telimedemo",
   "version": "0.1.0",
-  "homepage": "http://fpw23.github.io/telimed",
+  "homepage": "https://fpw23.github.io/telimed/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",

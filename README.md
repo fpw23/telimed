@@ -1,68 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Purpose
 
-## Available Scripts
+This is a proof of concept for embedding Jitsi video and audio conferencing into a react app.  
 
-In the project directory, you can run:
+### Summary
 
-### `npm start`
+There are two APIs available from Jitsi to accomplish this: [Jitsi Meet](https://github.com/jitsi/jitsi-meet/blob/master/doc/api.md) and [Lib Jitsi Meet](https://github.com/jitsi/lib-jitsi-meet).  Jitsi Meet is a high level API that embeds the entire Jitsi Meet interface into a div within your app.  Styling is very limited and control is pretty limited but as far as easy of use goes, I had it working within a few minutes.  Lib Jitsi Meet is 
+the lower level API used by Jitsi Meet to control the audio/video/text elements directly.  This route is much harder and took me about 4 days to figure out.  There are a lot of small concepts that you have to understand to get this API to work. 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Findings
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+* You have to include the lib-jitsi-meet.js file in your html page and let it attach to the window.  This file is available from a Jitsi Server installation at the URL //<server fqdn>/libs/lib-jitsi-meet.min.js.  You can also use //<server fqdn>/external_api.js.  This will include both Meet and Lib Meet.  I chose to only include Lib Meet since I wanted full control over the UI.  This file is fully compressed and worthless for debugging.  To make it easier to debug I check out the [github library](https://github.com/jitsi/lib-jitsi-meet) directly and built it locally then run the webpack command without the -p option to get an uncompressed version with source maps.  
 
-### `npm test`
+* The API has about 5 major parts and is pretty well documented [here](https://github.com/jitsi/lib-jitsi-meet/blob/master/doc/API.md).  There is also an example app [here](https://github.com/jitsi/lib-jitsi-meet/blob/master/doc/example/example.js) but since I wanted to use react I did not even try running it so I am not sure if it works but I did reference it alot.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* The main pitfall in react is to not use any Jitsi API ojects as state or props.  Instead attach them to the component directly or to the window object and let your components reach them from there.  I tried a number of ways to pass them and it would seem to work but then I would get random errors of max state update calls.  Instead of passing them as props directly, I found passing a primative repersentation of them worked better.  For example, you have audio and video tracks which repersent the Mic and Webcam as API objects.  You have to attach these to audio and video html 5 tags for each remote participant.  In react world, it made sense to make a [remote participant component](https://github.com/fpw23/telimed/blob/master/src/RemoteTrack.js) to display them.  The problem is I could not pass the tracks to the component due to the max state errors.  The solution was to passed the unique IDs for these objects that look like GUIDs as strings.  In the component's did update, when I detected a change in ID I queried the window oject which was created by a parent component for the real API objects and stored them locally on my component but not as state.  This let me use react components to break up the display without passing the Lib Meet API objects directly.  
 
-### `npm run build`
+* The [example](https://github.com/jitsi/lib-jitsi-meet/blob/master/doc/example/example.js) was very helpful but I found that for local audio tracks creating an [audio tag](https://github.com/jitsi/lib-jitsi-meet/blob/master/doc/example/example.js#L51) and attaching the local mic to it would cause me to hear myself as an echo when I talked.  Even with the muted=true attribute it still happened.  If I just ignored creating an audio tag for the local mic it seems to work.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* To hear remote mics I had to [set](https://github.com/fpw23/telimed/blob/master/src/RemoteTrack.js#L72) the AudioOutputDeviceId for each track.  The example did this at the [mediadevices](https://github.com/jitsi/lib-jitsi-meet/blob/master/doc/example/example.js#L233) level but this did not work for me for some reason. 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Conclusion
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+It is possible to use Jitsi lib to directly embed meet elements into your react app.  You can not take a traditional react approach and store Jitsi API objects as props or state or context.  You can still break your UI into components but those components will have to access some shared ojected outside React to use Jitsi.   

@@ -91,7 +91,7 @@ export class LocalTracks extends React.Component {
                             setTrack.attach(this.micRef.current)
                             setTrack.addEventListener(window.JitsiMeetJS.events.track.LOCAL_TRACK_STOPPED, this.onTrackStoppedEvent);
                             setTrack.addEventListener(window.JitsiMeetJS.events.track.TRACK_AUDIO_OUTPUT_CHANGED, this.onTrackAudioOutputChangedEvent);
-                            setTrack.unmute()
+                            setTrack.mute()
                         }
                     break
                     case 'video':
@@ -182,9 +182,9 @@ export class LocalTracks extends React.Component {
             <div class='local_track_body'>
                 <video autoPlay='1' ref={this.videoRef}/>
             </div>
-            <div>
+            {/* <div>
                 <audio autoPlay='1' muted='true' ref={this.micRef} />
-            </div>
+            </div> */}
         </div>
 
     }
