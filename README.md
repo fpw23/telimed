@@ -21,4 +21,8 @@ the lower level API used by Jitsi Meet to control the audio/video/text elements 
 
 ### Conclusion
 
-It is possible to use Jitsi lib to directly embed meet elements into your react app.  You can not take a traditional react approach and store Jitsi API objects as props or state or context.  You can still break your UI into components but those components will have to access some shared ojected outside React to use Jitsi.   
+It is possible to use Jitsi lib to directly embed meet elements into your react app.  You can not take a traditional react approach and store Jitsi API objects as props or state or context.  You can still break your UI into components but those components will have to access some shared ojected outside React to use Jitsi.  This poc only supports audio and video, you see a working example of it below:
+
+https://fpw23.github.io/telimed/
+
+Open this URL on two different computers and point them to the same room.  You will seen yourself on the Me box and everyone else on the Them box.
