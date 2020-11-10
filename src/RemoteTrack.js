@@ -16,7 +16,11 @@ export class RemoteTrack extends React.Component {
     }
 
     componentDidMount () {
-        const { trackIds = [], selectedSpeakerDeviceId } = this.props
+        let { trackIds = [], selectedSpeakerDeviceId } = this.props
+        trackIds = trackIds.map((track) => {
+            return track["id"];
+        });
+
         this.tracks = _.filter(window.telimed.remoteTracks, (rt) => { return _.indexOf(trackIds, rt.id) !== -1 })
 
         let videoTrack = _.find(this.tracks, { type: 'video' })
@@ -97,8 +101,8 @@ export class RemoteTrack extends React.Component {
             } catch (error) {
                 console.log(error.message)
             }
-        } 
-        let micTrack = _.find(this.tracks, { id: selectedMicId }) 
+        }
+        let micTrack = _.find(this.tracks, { id: selectedMicId })
         if (micTrack) {
             try {
                 this.updateTrack(micTrack, 'clear')
@@ -153,12 +157,12 @@ export class RemoteTrack extends React.Component {
     }
 
     render () {
-        
-        return <div class='remote_track'>
-            <div class='remote_track_controls'>
+
+        return <div className='remote_track'>
+            <div className='remote_track_controls'>
                 <span>???</span>
             </div>
-            <div class='remote_track_body'>
+            <div className='remote_track_body'>
                 <video autoPlay='1' ref={this.videoRef}/>
             </div>
             <div>

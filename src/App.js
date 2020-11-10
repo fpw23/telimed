@@ -56,7 +56,7 @@ export class App extends React.Component {
   componentDidUpdate () {
 
   }
-  
+
   onSpeakerChanged = (newSpeaker) => {
     this.setState({
       selectedSpeakerDeviceId: newSpeaker.id
@@ -84,13 +84,13 @@ export class App extends React.Component {
     let matchTrack = _.find(this.remoteTracks, { id: newTrackId })
     if (matchTrack) {
       return
-    }  
+    }
     let trackInfo = {
       id: newTrackId,
       participantId: track.getParticipantId(),
       type: track.getType(),
       track: track
-    } 
+    }
     window.telimed.remoteTracks.push(trackInfo)
     this.setState({
       remoteTrackIds: _.map(window.telimed.remoteTracks, (rt) => { return { id: rt.id, participantId: rt.participantId } })
@@ -100,13 +100,13 @@ export class App extends React.Component {
   onRoomTrackRemoved = (track) => {
     if (track.isLocal() === true) {
       return
-    } 
+    }
     let trackId = track.getId()
     window.telimed.remoteTracks = _.reject(window.telimed.remoteTracks, { id: trackId })
     this.setState({
       remoteTrackIds: _.map(window.telimed.remoteTracks, (rt) => { return { id: rt.id, participantId: rt.participantId } })
     })
-  
+
   }
 
   onConnectionSuccess = () => {
@@ -192,7 +192,7 @@ export class App extends React.Component {
       this.setState({
         status: 'Leaving...'
       })
-      try {  
+      try {
         window.telimed.activeRoom.leave().then(() => {
           if (window.telimed.activeConnection) {
             window.telimed.activeConnection.disconnect()
@@ -254,14 +254,14 @@ export class App extends React.Component {
               ? <button onClick={this.onConnect}>
                 Connect
               </button>
-              : status === 'open' 
+              : status === 'open'
                   ? <button onClick={this.onDisconnect}>
                       Disconnect
                     </button>
                   : <button disabled={true} >
                       {status}
                     </button>
-            } 
+            }
           </div>
           <div>{lastError}</div>
         </div>
@@ -270,7 +270,7 @@ export class App extends React.Component {
             <h3>Me</h3>
             <LocalSpeaker deviceList={deviceList} key='LocalSpeaker' defaultSpeakerId={defaultSpeakerId} onSpeakerChanged={this.onSpeakerChanged} />
           </div>
-          <div class='TR_Body'>
+          <div className='TR_Body'>
             <div className="TR_Body_Block">
               <LocalTracks activeRoomId={activeRoomId} deviceList={deviceList} defaultMicId={defaultMicId} defaultVideoId={defaultVideoId} key='localTracks' />
             </div>
