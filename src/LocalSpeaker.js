@@ -43,8 +43,8 @@ export class LocalSpeaker extends React.Component {
         return <React.Fragment>
             <span>Speaker</span>
             <select value={selectedSpeakerDeviceId} onChange={this.onSpeakerChanged}>
-                {_.map(speakerList, (s) => <option value={s.id}>{s.name}</option>)}
-            </select>    
+                {_.map(speakerList, (s) => <option key={s.id} value={s.id}>{s.name}</option>)}
+            </select>
         </React.Fragment>
 
     }

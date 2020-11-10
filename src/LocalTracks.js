@@ -39,7 +39,7 @@ export class LocalTracks extends React.Component {
 
                 if (activeRoomId && window.telimed.activeRoom) {
                     let videoTrack = _.find(this.trackList, (t) => { return t.deviceId === defaultVideoId })
-                    let micTrack = _.find(this.trackList, (t) => { return t.deviceId === defaultMicId })   
+                    let micTrack = _.find(this.trackList, (t) => { return t.deviceId === defaultMicId })
                     if (videoTrack) {
                         window.telimed.activeRoom.addTrack(videoTrack)
                     }
@@ -105,7 +105,7 @@ export class LocalTracks extends React.Component {
     }
 
     componentDidUpdate (prevProps, prevState) {
-        
+
         const selectedVideoDeviceId = componentGetCompareProps('selectedVideoDeviceId', this.state, prevState, '')
 
         if (selectedVideoDeviceId.HasChanged) {
@@ -134,7 +134,7 @@ export class LocalTracks extends React.Component {
             if (activeRoomId.Current && window.telimed.activeRoom) {
                 const { selectedMicDeviceId, selectedVideoDeviceId } = this.state
                 let videoTrack = _.find(this.trackList, (t) => { return t.deviceId === selectedVideoDeviceId })
-                let micTrack = _.find(this.trackList, (t) => { return t.deviceId === selectedMicDeviceId })   
+                let micTrack = _.find(this.trackList, (t) => { return t.deviceId === selectedMicDeviceId })
                 if (videoTrack) {
                     window.telimed.activeRoom.addTrack(videoTrack)
                 }
@@ -162,24 +162,24 @@ export class LocalTracks extends React.Component {
 
     render () {
         const { selectedVideoDeviceId, selectedMicDeviceId, deviceList = [] } = this.state
-        
-       
-        return <div class='local_track'>
-            <div class='local_track_controls'>
+
+
+        return <div className='local_track'>
+            <div className='local_track_controls'>
                 <span>Camera</span>
                 <select value={selectedVideoDeviceId} onChange={this.onCameraChange}>
                     {_.map(_.concat([{ name: 'none', id: 'none', type: 'none' }], _.filter(deviceList, { type: 'videoinput' })), (d) => {
-                        return <option value={d.id}>{d.name}</option>
+                        return <option key={d.id} value={d.id}>{d.name}</option>
                     })}
                 </select>
                 <span>Microphone</span>
                 <select value={selectedMicDeviceId} onChange={this.onMicrophoneChange}>
                     {_.map(_.filter(deviceList, { type: 'audioinput' }), (d) => {
-                        return <option value={d.id}>{d.name}</option>
+                        return <option key={d.id} value={d.id}>{d.name}</option>
                     })}
                 </select>
             </div>
-            <div class='local_track_body'>
+            <div className='local_track_body'>
                 <video autoPlay='1' ref={this.videoRef}/>
             </div>
             {/* <div>
